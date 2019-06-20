@@ -1,0 +1,12 @@
+{
+  "name": "reus-webapp-starter",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "reus launch . --mode dev",
+    "build": "reus build .",
+    "deploy": "reus launch ."
+  },
+  "dependencies": {
+    "reus.js": "^0.3.1"
+  }
+}
