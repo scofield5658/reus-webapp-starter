@@ -1,7 +1,7 @@
-import utils from 'loader-utils';
-import { tgtURL, abs2rel } from '../helpers/utils';
+const utils = require('loader-utils');
+const { tgtURL, abs2rel } = require('../helpers/utils');
 
-export default function () {
+module.exports = function() {
   // if in node env, no lazy load
   if (this.target == 'node') {
     return `
@@ -10,7 +10,7 @@ export default function () {
       }
     `;
   }
- 
+
   const relpath = abs2rel(this.resourcePath);
   const url = tgtURL(relpath).replace(/\.\w+$/, '');
   return `
@@ -20,6 +20,4 @@ export default function () {
       }, "${url}");
     }
   `;
-}
-
-
+};

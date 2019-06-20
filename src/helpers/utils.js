@@ -1,47 +1,43 @@
 const config = require('../../config');
 
-export const _require = (path) => {
-  return require(path);
-};
+exports.noop = function(){};
 
-export const noop = () => {};
-
-export const tgtRoute = (route) => {
+exports.tgtRoute = (route) => {
   return (`${config.baseUrl}${route}`).replace(/\\/gmi, '/');
 };
 
-export const srcRoute = (url) => {
+exports.srcRoute = (url) => {
   return (url.replace(new RegExp(`^${config.baseUrl}`), '')).replace(/\\/gmi, '/');
 };
 
-export const tgtURL = (url) => {
+exports.tgtURL = (url) => {
   const tgtBase = config.env == 'production' ?
     config.cdnUrl : config.baseUrl;
   return (`${tgtBase}${url.replace(/\\/gmi, '/').replace(/^\/pages/, '')}`).replace(/\\/gmi, '/');
 };
 
-export const srcUrl = (url) => {
+exports.srcUrl = (url) => {
   const tgtBase = config.env == 'production' ?
     config.cdnUrl : config.baseUrl;
   return (url.replace(new RegExp(`^${tgtBase}`), '/pages')).replace(/\\/gmi, '/');
 };
 
-export const getExtname = (pathname) => {
-  const path = _require('path');
+exports.getExtname = (pathname) => {
+  const path = require('path');
   return path.extname(pathname);
 };
 
-export const calcMD5 = (str, len = 12) => {
-  const crypto = _require('crypto');
+exports.calcMD5 = (str, len = 12) => {
+  const crypto = require('crypto');
   const md5 = crypto.createHash('md5').update(str).digest('hex');
   return md5.substring(md5.length - len, md5.length);
 };
 
-export const isEmpty = (val) => {
+exports.isEmpty = (val) => {
   return typeof val === 'undefined' || val === null;
 };
 
-export const isEmptyObject = (obj) => {
+exports.isEmptyObject = (obj) => {
   if (typeof obj !== 'object') {
     return false;
   }
@@ -53,9 +49,9 @@ export const isEmptyObject = (obj) => {
   return true;
 };
 
-export const mkdirs = (dirname) => {
-  const fs = _require('fs');
-  const path = _require('path');
+exports.mkdirs = (dirname) => {
+  const fs = require('fs');
+  const path = require('path');
   const dirs = dirname.split(path.sep);
   for (let i = 1, ii = dirs.length; i < ii; i++) {
     const tmp = dirs.slice(0, i + 1).join(path.sep);
@@ -65,16 +61,16 @@ export const mkdirs = (dirname) => {
   }
 };
 
-export const writefile = (filepath, content) => {
+exports.writefile = (filepath, content) => {
   const fs = require('fs');
-  const path = _require('path');
+  const path = require('path');
   mkdirs(path.dirname(filepath));
   fs.writeFileSync(filepath, content);
 };
 
-export const hashfile = (filepath) => {
-  const fs = _require('fs');
-  const path = _require('path');
+exports.hashfile = (filepath) => {
+  const fs = require('fs');
+  const path = require('path');
   const buffer = fs.readFileSync(filepath);
   const hash = calcMD5(buffer);
 
@@ -86,50 +82,50 @@ export const hashfile = (filepath) => {
   };
 };
 
-export const cpfile = ({from, to}) => {
-  const fs = _require('fs');
-  const path = _require('path');
+exports.cpfile = ({from, to}) => {
+  const fs = require('fs');
+  const path = require('path');
 
   mkdirs(path.dirname(to));
 
   fs.writeFileSync(to, fs.readFileSync(from));
 };
 
-export const rel2abs = (relpath) => { 
-  const path = _require('path');
+exports.rel2abs = (relpath) => {
+  const path = require('path');
   return path.join(__dirname, `..${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
-export const abs2rel = (abspath) => {
-  const path = _require('path');
+exports.abs2rel = (abspath) => {
+  const path = require('path');
   const basedir = path.join(__dirname, '../..').replace(/\\/gmi, '/');
   return abspath.replace(/\\/gmi, '/').replace(new RegExp(`^${basedir}/[^/]+`), '').replace(/\//gmi, path.sep);
 };
 
-export const abssrc = (relpath) => {
-  const path = _require('path');
+exports.abssrc = (relpath) => {
+  const path = require('path');
   return path.join(__dirname, `../../src/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
-export const absdest = (relpath) => {
-  const path = _require('path');
-  return path.join(__dirname, `../../dest/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
+exports.absdest = (relpath) => {
+  const path = require('path');
+  return path.join(__dirname, `../../dist/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
-export const abstmp = (relpath) => {
-  const path = _require('path');
+exports.abstmp = (relpath) => {
+  const path = require('path');
   return path.join(__dirname, `../../.tmp/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
-export const isBrowser = () => {
+exports.isBrowser = () => {
   return typeof window !== 'undefined';
 };
 
-export const isServer = () => {
+exports.isServer = () => {
   return !isBrowser();
 };
 
-export const getData = (obj, key) => {
+exports.getData = (obj, key) => {
   if (obj == null) {
     return obj || null;
   }
@@ -140,9 +136,9 @@ export const getData = (obj, key) => {
     const matches = prop.match(/(\w*)\[(\w+)\]/);
     if (!matches) {
       return obj[prop];
-    } 
+    }
 
-    const tmp = matches[1] ? 
+    const tmp = matches[1] ?
       (obj[matches[1]] || []) : obj;
 
     // array, like d5[3]
@@ -156,7 +152,7 @@ export const getData = (obj, key) => {
   }
 };
 
-export const setData = (obj, key, value) => {
+exports.setData = (obj, key, value) => {
   const props = key.split('.');
   const prop = props.shift();
   if (props.length == 0) {
@@ -169,7 +165,7 @@ export const setData = (obj, key, value) => {
     // normal obj
     if (!matches) {
       return obj[prop] || (obj[prop] = {});
-    } 
+    }
 
     // array, like d5[3]
     const key = matches[1];
@@ -186,18 +182,18 @@ export const setData = (obj, key, value) => {
     const matches = prop.match(/(\w+)\[(\d+)\]/);
     if (!matches) {
       return obj[prop];
-    } 
+    }
     // array, like d5[3]
     return (obj[matches[1]] || [])[matches[2]];
   })(prop, obj);
   */
 };
 
-export const radom = (m = 0, n = 100000000) => {
+exports.radom = (m = 0, n = 100000000) => {
   return Math.floor(Math.random() * (n - m + 1)) + m;
 };
 
-export const queryString = (url) => {
+exports.queryString = (url) => {
   const qs = {};
   var matches = url.match(/[^=?&#]+=[^=?&#]+/g);
   if (matches) {
@@ -209,7 +205,7 @@ export const queryString = (url) => {
   return qs;
 };
 
-export const sleep = (delay) => {
+exports.sleep = (delay) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
@@ -217,7 +213,7 @@ export const sleep = (delay) => {
   });
 };
 
-export const range = (start, end) => {
+exports.range = (start, end) => {
   const arr = [];
   for (let i = start; i <= end; i++) {
     arr.push(i);
@@ -225,7 +221,7 @@ export const range = (start, end) => {
   return arr;
 };
 
-export const getDateTime = (s) => {
+exports.getDateTime = (s) => {
   const exec = (/(\d+)-(\d+)-(\d+)\s+(\d+):(\d+):(\d+)/.exec(s));
   const year = exec[1] - 0;
   const month = exec[2] - 1;
@@ -236,7 +232,7 @@ export const getDateTime = (s) => {
   return new Date(year, month, date, hh, mi, ss);
 };
 
-export const getFormatDate = (date, format) => {
+exports.getFormatDate = (date, format) => {
   const obj = {
     'M+': date.getMonth() + 1,
     'd+': date.getDate(),
@@ -262,7 +258,7 @@ export const getFormatDate = (date, format) => {
 };
 
 let counter = 0;
-export const getUnique = (prefix) => {
+exports.getUnique = (prefix) => {
   return `${prefix || ''}${counter++}`;
 };
 

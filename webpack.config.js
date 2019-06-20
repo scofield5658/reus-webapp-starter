@@ -1,6 +1,6 @@
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import config from './config';
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const config = require('./config');
 
 module.exports = {
   module: {
@@ -11,8 +11,6 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           presets: ['env']
-          //babelrc: false,
-          //presets: [["env", { "modules": false, "loose": true }]]
         }
       },
       {

@@ -1,24 +1,23 @@
-import fs from 'fs';
-import path from 'path';
-import url from 'url';
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import config from '../../config';
-import webpackConfig from '../../webpack.config';
-import {abs2rel, abstmp, srcUrl, cpfile, isEmptyObject, radom} from '../helpers/utils';
-import asset from '../loaders/asset';
-import manifest from '../loaders/manifest';
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const config = require('../../config');
+const webpackConfig = require('../../webpack.config');
+const {abs2rel, abstmp, srcUrl, cpfile, isEmptyObject, radom} = require('../helpers/utils');
+const asset = require('../loaders/asset');
+const manifest = require('../loaders/manifest');
 
-export default async ({filepath, referer, target = 'web', extract, library}) => {
-  return new Promise((resolve, reject) => {
+module.exports = async function({filepath, referer, target = 'web', extract, library}) {
+  return new Promise(function(resolve, reject) {
 
     //const extname = path.extname(filepath);
     const tmppath = abstmp(abs2rel(filepath));
 
-    const tgtConfig = {
-      ...webpackConfig,
+    const tgtConfig = Object.assign({}, webpackConfig, {
       entry: {
-        'entry': filepath 
+        'entry': filepath
       },
       output: {
         path: path.dirname(tmppath),
@@ -28,14 +27,14 @@ export default async ({filepath, referer, target = 'web', extract, library}) => 
           '[name].[hash:12].js' : '[name].js?__temporary=true'
       },
       target,
-      plugins: [...(webpackConfig.plugins || [])]
-    };
-    
+      plugins: webpackConfig.plugins || [],
+    });
+
     if (asset.externals.test(filepath)) {
       const library = asset.externals.decode(filepath);
       tgtConfig.entry = {'entry': library};
       tgtConfig.output.library = library;
-    } 
+    }
 
     if (library) {
       tgtConfig.output.library = library;
@@ -43,7 +42,7 @@ export default async ({filepath, referer, target = 'web', extract, library}) => 
 
     if (referer) {
       const externals = {};
-      (manifest.pages.get(referer, 'js') || []).forEach((js) => {
+      (manifest.pages.get(referer, 'js') || []).forEach(function(js) {
         if (asset.externals.test(js)) {
           const external = asset.externals.decode(js);
           externals[external] = external;
@@ -66,7 +65,7 @@ export default async ({filepath, referer, target = 'web', extract, library}) => 
     }
 
     let extfile = null;
-   
+
     if (extract) {
       const {ext} = extract;
       const plugins = tgtConfig.plugins || (tgtConfig.plugins = []);
@@ -80,12 +79,12 @@ export default async ({filepath, referer, target = 'web', extract, library}) => 
 
     const compiler = webpack(tgtConfig);
 
-    compiler.run((err, stats) => {
+    compiler.run(function(err, stats) {
       try {
         if (err) {
           return reject(err);
         }
-        
+
         const res = {
           content: fs.readFileSync(tmppath),
           filepath: tmppath

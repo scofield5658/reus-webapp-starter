@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     path: '/samples/hello-world',
     title: 'hello-world',

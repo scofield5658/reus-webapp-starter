@@ -1,20 +1,20 @@
-import fs from 'fs';
-import path from 'path';
-import qs from 'qs';
-import url from 'url';
-import {abs2rel, srcUrl, tgtURL, isEmptyObject, hashfile, writefile, absdest} from '../helpers/utils';
-import config from '../../config';
+const fs = require('fs');
+const path = require('path');
+const qs = require('qs');
+const url = require('url');
+const { abs2rel, srcUrl, tgtURL, isEmptyObject, hashfile, writefile, absdest } = require('../helpers/utils');
+const config = require('../../config');
 
-const rels = (filepath, sregs) => {
+const rels = function(filepath, sregs) {
   const rels = [];
-   
-  const iterator = (filepath) => {
+
+  const iterator = function(filepath) {
     rels.push(filepath);
 
     const dirname = path.dirname(filepath);
     const content = fs.readFileSync(filepath, 'utf-8');
 
-    const regs = sregs.map(sreg => new RegExp(sreg, 'gmi'));
+    const regs = sregs.map(function(sreg){ return new RegExp(sreg, 'gmi'); });
 
     for (let reg of regs) {
       let exec = reg.exec(content);
@@ -33,12 +33,12 @@ const rels = (filepath, sregs) => {
   return rels;
 };
 
-const link = (filepath, sregs) => {
+const link = function(filepath, sregs) {
 
   const dirname = path.dirname(filepath);
   let content = fs.readFileSync(filepath, 'utf-8');
 
-  const regs = sregs.map(({match, from, to}) => {
+  const regs = sregs.map(function({match, from, to}) {
     return {
       match: new RegExp(match, 'gmi'),
       from: new RegExp(from, 'gmi'),
@@ -47,8 +47,8 @@ const link = (filepath, sregs) => {
   });
 
   for (const {match, from, to} of regs) {
-    content = content.replace(match, ($0) => {
-      return $0.replace(from, ($0, $1) => {
+    content = content.replace(match, function($0) {
+      return $0.replace(from, function($0, $1) {
         if (/^(http(s)?:)?\/\//.test($1)) {
           return $0;
         }
@@ -57,10 +57,10 @@ const link = (filepath, sregs) => {
           return $0;
         }
 
-        const abspath = path.join(dirname, asset.externals.is($1) ? 
+        const abspath = path.join(dirname, asset.externals.is($1) ?
           asset.externals.encode($1) : $1);
 
-        const relpath = ((abspath) => {
+        const relpath = (function(abspath) {
           if (config.env !== 'production' || !config.assets.test(abspath)) {
             return abs2rel(abspath);
           }
@@ -155,7 +155,7 @@ const asset = {
   link: {
     stringify(props) {
       const src = srcUrl(props['__src']);
-      const clone = {...props};
+      const clone = Object.assign({}, props);
       delete clone['__src'];
 
       // cache npm default
@@ -192,4 +192,4 @@ const asset = {
   }
 };
 
-export default asset;
+module.exports = asset;

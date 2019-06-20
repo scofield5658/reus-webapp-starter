@@ -1,21 +1,18 @@
-import fs from 'fs';
-import path from 'path';
-import manifest from '../loaders/manifest';
-import {tgtURL} from '../helpers/utils';
-import config from '../../config';
+const manifest = require('../loaders/manifest');
+const config = require('../../config');
 
 let refers = {};
 const referer = {
   get({route, next}) {
     const nexts = (refers[route] || (refers[route] = []))
-      .filter((refer) => refer.route == next);
-  
-    return nexts.length 
-      ? nexts[0] : 
+      .filter(function(refer){ return refer.route == next; });
+
+    return nexts.length
+      ? nexts[0] :
       {
-        route: next, 
+        route: next,
         count: 0,
-        files: (() => {
+        files: (function() {
           const cssfiles = manifest.pages.get(next, 'css') || [];
           const jsfiles = manifest.pages.get(next, 'js') || [];
 
@@ -37,8 +34,8 @@ const referer = {
   },
   dot({route, next}) {
 
-    process.nextTick(() => {
-      
+    process.nextTick(function() {
+
       const data = referer.get({route, next});
 
       data.count++;
@@ -52,7 +49,7 @@ const referer = {
   sort() {
     for (const route in refers) {
       (refers[route] || (refers[route] = []))
-        .sort((current, next) => {
+        .sort(function(current, next) {
           return current.count < next.count;
         });
     }
@@ -67,12 +64,4 @@ if ((config.mirage && config.mirage.enable)
   setInterval(referer.sort, config.mirage.interval || 60000);
 }
 
-// excute per mintue
-//schedule.scheduleJob('* * * * * *', referer.sort);
-
-// excute per am: 03:00:00
-//schedule.scheduleJob('* 3 * * * *', referer.clear);
-
-
-
-export default referer;
+module.exports = referer;

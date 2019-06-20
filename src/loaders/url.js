@@ -1,8 +1,8 @@
-import path from 'path';
-import {tgtURL, abs2rel, absdest, hashfile, writefile} from '../helpers/utils';
-import config from '../../config';
+const path = require('path');
+const {tgtURL, abs2rel, absdest, hashfile, writefile} = require('../helpers/utils');
+const config = require('../../config');
 
-export default function () {
+module.exports = function () {
 
   const relpath = ((abspath) => {
     if (config.env !== 'production') {
@@ -17,4 +17,4 @@ export default function () {
 
   const url = tgtURL(relpath);
   return `module.exports = __webpack_public_path__ + ${JSON.stringify(url)};`;
-}
+};

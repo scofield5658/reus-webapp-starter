@@ -1,19 +1,16 @@
-import {getExtname, abssrc} from '../helpers/utils';
-import config from '../../loader.config';
+const {getExtname, abssrc} = require('../helpers/utils');
+const config = require('../../loader.config');
 
 const loaders = config.loaders
-  .map((loader) => {
-    return {
-      ...loader,
-      loader: require(`../${loader.loader}`).default
-    };
+  .map(function(loader) {
+    return Object.assign({}, loader, { loader: require(`../${loader.loader}`) });
   })
-  .reduce((loaders, loader) => {
+  .reduce(function(loaders, loader) {
     loaders[loader.fromext] = loader;
     return loaders;
   }, {});
 
-export default {
+module.exports = {
   test({pathname}) {
     const extname = getExtname(pathname);
     if (!extname) {
@@ -22,7 +19,7 @@ export default {
 
     return !!loaders[extname];
   },
-  async compile({pathname, target, referer, extract, library}) {
+  compile: async function({pathname, target, referer, extract, library}) {
     const extname = getExtname(pathname);
     const {type, loader} = loaders[extname];
 
@@ -35,6 +32,6 @@ export default {
       //externals: asset.externals.all(referer)
     });
 
-    return {...res, type};
+    return Object.assign({}, res, { type });
   }
-}; 
+};

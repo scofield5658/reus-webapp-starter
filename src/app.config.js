@@ -1,9 +1,13 @@
-require('babel-register');
-require('babel-polyfill');
 const logger = require('./middlewares/logger');
+const cache = require('./middlewares/cache');
+const loader = require('./middlewares/loader');
+const mount = require('./middlewares/mount');
+const render = require('./helpers/render');
+
 const routers = require('./routers');
 
 module.exports = {
   routers,
-  middlewares: [logger],
+  render,
+  middlewares: [logger, cache, loader, mount],
 };

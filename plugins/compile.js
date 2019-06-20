@@ -1,32 +1,25 @@
-import gulp from 'gulp';
-import concat from 'gulp-concat';
-import sequence from 'gulp-sequence';
-import uglify from 'gulp-uglify';
-import cleanCSS from 'gulp-clean-css';
-import url from 'url';
-import fs from 'fs';
-import path from 'path';
-import log from 'fancy-log';
-import manifest from '../src/loaders/manifest';
-import asset from '../src/loaders/asset';
-import loader from '../src/loaders/loader';
-import {rel2abs, abs2rel, absdest, abstmp, tmp2abs, abssrc, tgtURL, calcMD5, writefile, cpfile} from '../src/helpers/utils';
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const cleanCSS = require('gulp-clean-css');
+const url = require('url');
+const fs = require('fs');
+const path = require('path');
+const log = require('fancy-log');
+const manifest = require('../src/loaders/manifest');
+const asset = require('../src/loaders/asset');
+const loader = require('../src/loaders/loader');
+const { rel2abs, abs2rel, absdest, abstmp, calcMD5, writefile } = require('../src/helpers/utils');
 
-gulp.task('copy', () => {
-  return gulp.src('src/**/*')
-    .pipe(gulp.dest('dest'));
-});
-
-gulp.task('compile', async () => {
+module.exports = async function(gulp, params) {
   const routes = manifest.pages.routes();
-  const destManifest = require('../dest/loaders/manifest').default;
-  
+  const destManifest = require('../dist/loaders/manifest');
+
   const ssrRoutes = (() => {
     const ssrRoutes = {};
-    const routes = require('../dest/routes').default;
+    const routes = require('../dist/routes');
     for (const route of routes) {
-      if (route.ssr) {
-        ssrRoutes[route.path] = route.ssr;
+      if (route.preload.ssr) {
+        ssrRoutes[route.path] = route.preload.ssr;
       }
     }
     return ssrRoutes;
@@ -62,7 +55,7 @@ gulp.task('compile', async () => {
               entry: abspath
             });
           }
-          
+
           continue;
         }
 
@@ -125,7 +118,7 @@ gulp.task('compile', async () => {
 
       //{task, chunk, entryfiles}
       const tmppath = `./.tmp${path.dirname(html)}/__${chunk}.${ext}`;
-      
+
       await task(entryfiles.map(entryfile => entryfile.entry), tmppath);
 
       const buffer = fs.readFileSync(tmppath);
@@ -136,7 +129,7 @@ gulp.task('compile', async () => {
 
       destfiles.push(abs2rel(destpath));
 
-      // handle chunks 
+      // handle chunks
       for (const {entry, chunks} of entryfiles) {
         if (!chunks || !chunks.length) {
           continue;
@@ -145,19 +138,19 @@ gulp.task('compile', async () => {
         for (const chunk of chunks) {
           await task([chunk], absdest(abs2rel(chunk)));
 
-          // cp to dest relative path 
+          // cp to dest relative path
           // to fixed ssr load js package problem
           /*
-          console.log('>>>>>>entry:');
-          console.log(chunk);
-          console.log(absdest(abs2rel(entry)));
-          console.log(absdest(abs2rel(chunk)));
-          cpfile({
-            from: chunk,
-            to: path.join(absdest(abs2rel(path.dirname(entry))), tgtURL(abs2rel(chunk)))
-          });
-          */
-      
+            console.log('>>>>>>entry:');
+            console.log(chunk);
+            console.log(absdest(abs2rel(entry)));
+            console.log(absdest(abs2rel(chunk)));
+            cpfile({
+              from: chunk,
+              to: path.join(absdest(abs2rel(path.dirname(entry))), tgtURL(abs2rel(chunk)))
+            });
+            */
+
         }
       }
     }
@@ -200,7 +193,7 @@ gulp.task('compile', async () => {
 
       destManifest.pages.set(route, 'js', jsfiles.destfiles);
 
-      (jsfiles.extractfiles || []).forEach(({filepath}) => cssextracts.push(filepath));      
+      (jsfiles.extractfiles || []).forEach(({filepath}) => cssextracts.push(filepath));
     }
 
     // compile css
@@ -222,13 +215,6 @@ gulp.task('compile', async () => {
       });
 
       destManifest.pages.set(route, 'css', cssfiles.destfiles);
-    }    
+    }
   }
-});
-
-gulp.task('build', sequence(
-  ['clean:dest', 'clean:tmp'],
-  'copy',
-  'compile',
-  'clean:tmp'
-)); 
+};

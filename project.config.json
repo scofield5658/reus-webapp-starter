@@ -1,5 +1,19 @@
 {
   "app": {
-    "port": 5658
-  }
+    "port": 8080
+  },
+  "browserSync": {
+    "port": 3001,
+    "ui_port": 10000,
+    "reloadDelay": 300,
+    "notify": false,
+    "domain": "",
+    "files": ["./src/pages"]
+  },
+  "buildPlugins": [
+    {
+      "name": "compile",
+      "params": {}
+    }
+  ]
 }

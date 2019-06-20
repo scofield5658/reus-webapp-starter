@@ -1,7 +1,7 @@
-import {abssrc, abstmp, absdest, writefile, radom} from '../helpers/utils';
-import webpack from '../loaders/webpack';
-import routes from '../routes';
-import config from '../../config';
+const {abssrc, abstmp, absdest, writefile, radom} = require('../helpers/utils');
+const webpack = require('../loaders/webpack');
+const routes = require('../routers');
+const config = require('../../config');
 
 // pre-load ssr entry
 if (config.env === 'production') {
@@ -13,20 +13,19 @@ if (config.env === 'production') {
   }
 }
 
-export default {
-  async vue({entry, route}) {
-    
-    return new Promise(async (resolve, reject) => {
+module.exports = {
+  vue({entry, route}) {
+    return new Promise(async function(resolve, reject) {
       try {
-        const filepath = await (async () => {
+        const filepath = await (async function() {
           if (config.env === 'production') {
             return absdest(entry);
-          } 
+          }
 
           const {content} = await webpack({
-            filepath: abssrc(entry), 
+            filepath: abssrc(entry),
             //referer: srcUrl(url.parse(route).pathname),
-            target: 'node', 
+            target: 'node',
             extract: {ext: 'css'}});
           const tmppath = `${abstmp(entry)}.${radom()}.js`;
 
@@ -34,20 +33,20 @@ export default {
 
           return tmppath;
         })();
-        
+
         const {createApp} = require(filepath);
         const {app, router, store} = createApp();
 
         router.push(route);
-        router.onReady(() => {
+        router.onReady(function() {
           const components = router.getMatchedComponents();
           if (!components.length) {
             return reject('not found');
           }
 
-          Promise.all(components.map(({asyncData}) => {
+          Promise.all(components.map(function({asyncData}) {
             return asyncData && asyncData({store, route: router.currentRoute});
-          })).then(async () => {
+          })).then(async function() {
             const renderer = require('vue-server-renderer').createRenderer();
             const html = await renderer.renderToString(app);
 
