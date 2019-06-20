@@ -1,7 +1,5 @@
-const Hello = require('./hello');
-const Limit = require('./limit');
+const Samples = require('./samples');
 
 module.exports = [
-  ...Hello,
-  ...Limit,
+  ...Samples,
 ];

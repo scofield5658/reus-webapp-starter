@@ -1,3 +1,5 @@
+require('babel-register');
+require('babel-polyfill');
 const logger = require('./middlewares/logger');
 const routers = require('./routers');
 
