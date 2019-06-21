@@ -4375,7 +4375,7 @@ html-comment-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.2.tgz#97d4688aeb5c81886a364faa0cad1dda14d433a7"
   integrity sha512-P+M65QY2JQ5Y0G9KKdlDpo0zK+/OHptU5AaBwUfAIDJZk1MYf32Frm84EcOytfJE0t5JvkAnKlmjsXDnWzCJmQ==
 
-html-minifier@^3.5.9:
+html-minifier@^3.5.21:
   version "3.5.21"
   resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.21.tgz#d0040e054730e354db008463593194015212d20c"
   integrity sha512-LKUKwuJDhxNa3uf/LPR/KVjm/l3rBqtYeCOAekvG8F1vItxMUpueGd94i/asDDr8/1u7InxzFA5EeGjhhG5mMA==
@@ -5027,7 +5027,7 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jquery@^3.3.1:
+jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
@@ -7880,10 +7880,10 @@ ret@~0.1.10:
   resolved "https://registry.npm.taobao.org/ret/download/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha1-uKSCXVvbH8P29Twrwz+BOIaBx7w=
 
-reus.js@^0.4.8:
-  version "0.4.8"
-  resolved "https://registry.yarnpkg.com/reus.js/-/reus.js-0.4.8.tgz#5bf0bd59f0a47fce1be1865bd28d06b1327b44c1"
-  integrity sha512-FE2p9hf2EGpyxInKqlldxR35p4AFq5cG18xZSkaeTEuVZvdYLINc7oStMKMQhatWP6aTLlDO3YLekMm6lzPPUA==
+reus.js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/reus.js/-/reus.js-1.0.0.tgz#1663ee88a173bba515394044afa8feadd87771f7"
+  integrity sha512-DLVowPNoVEiEBku1Y3nyyV30vO7Z3LdoNxz4aECgVw2Dv41GsLf6ISaNXT9rLzyyYmvdtDQbopZTPBB72wOlDQ==
   dependencies:
     browser-sync "2.26.7"
     commander "^2.17.1"

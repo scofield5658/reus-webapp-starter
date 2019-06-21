@@ -103,7 +103,7 @@ module.exports = async function({filepath, referer, target = 'web', extract, lib
         // chunks
         {
           const chunks = stats.compilation.chunks;
-          if (chunks && chunks) {
+          if (chunks) {
             res.chunks = [];
             for (const chunk of chunks) {
               if (chunk.name == 'entry') {

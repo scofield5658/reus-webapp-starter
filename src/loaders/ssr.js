@@ -1,6 +1,6 @@
 const {abssrc, abstmp, absdest, writefile, radom} = require('../helpers/utils');
-const webpack = require('../loaders/webpack');
-const routes = require('../routers');
+const webpack = require('./webpack');
+const routes = require('../routers/origin');
 const config = require('../../config');
 
 // pre-load ssr entry

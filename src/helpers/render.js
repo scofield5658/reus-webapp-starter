@@ -35,7 +35,6 @@ const getRenderParams = ({ html = '', state = {}, enable = false }) => {
 module.exports = async function(ctx, viewpath, data) {
   const route = srcRoute(getRoute(url.parse(ctx.req.url).pathname));
   const { ssr: ssrConfig } = data;
-
   let viewData = {};
 
   const queries = ctx.query || {};

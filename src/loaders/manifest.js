@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const asset = require('./asset');
 const {isEmpty} = require('../helpers/utils');
-const routes = require('../routers');
+const routes = require('../routers/origin');
 
 const filepath = path.join(__dirname, '../manifest.json');
 const manifest = (function() {

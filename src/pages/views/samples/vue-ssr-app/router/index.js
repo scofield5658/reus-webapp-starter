@@ -1,15 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { tgtRoute } from '../../../../../helpers/utils';
 
 Vue.use(VueRouter);
 
 export const routes = [
   {
-    path: '/samples/vue-ssr-app',
+    path: tgtRoute('/samples/vue-ssr-app'),
     component: require('../views/cities/cities.vue').default
   },
   {
-    path: '/samples/vue-ssr-app/weather',
+    path: tgtRoute('/samples/vue-ssr-app/weather'),
     component: require('../views/weather/weather.vue').default
   },
 ];

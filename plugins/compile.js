@@ -16,10 +16,16 @@ module.exports = async function(gulp, params) {
 
   const ssrRoutes = (() => {
     const ssrRoutes = {};
-    const routes = require('../dist/routes');
+    const routes = require('../dist/routers/origin');
     for (const route of routes) {
-      if (route.preload.ssr) {
-        ssrRoutes[route.path] = route.preload.ssr;
+      let payload = {};
+      if (typeof route.preload === 'function') {
+        payload = Object.assign(payload, route.preload());
+      } else if (typeof route.preload === 'object') {
+        payload = Object.assign(payload, route.preload);
+      }
+      if (payload.ssr) {
+        ssrRoutes[route.path] = payload.ssr;
       }
     }
     return ssrRoutes;

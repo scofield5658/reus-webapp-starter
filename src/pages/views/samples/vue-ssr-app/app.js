@@ -12,7 +12,6 @@ Vue.use(require('./plugins/interval').default);
 const createApp = () => {
   const router = createRouter();
   const store = createStore();
-  console.log(router);
 
   // must use before inited
   if (isBrowser()) {
@@ -86,7 +85,10 @@ const createApp = () => {
       };
 
       if (config.env === 'production' || qs.__ssr) {
-        router.onReady(() => router.beforeResolve(beforeResolve));
+        router.onReady(() => {
+          inst.hideLoading();
+          return router.beforeResolve(beforeResolve);
+        });
       } else {
         beforeResolve(router.currentRoute, null, noop);
         router.beforeResolve(beforeResolve);
