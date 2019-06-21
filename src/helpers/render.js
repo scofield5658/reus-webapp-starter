@@ -5,6 +5,7 @@ const config = require('../../config');
 const manifest = require('../loaders/manifest');
 const asset = require('../loaders/asset');
 const referer = require('../loaders/referer');
+const ssr = require('../loaders/ssr');
 const routes = require('../routers');
 const {srcRoute, srcUrl, writefile, abssrc, abstmp, absdest, abs2rel, tgtURL} = require('../helpers/utils');
 
@@ -23,12 +24,32 @@ const getRoute = (route) => {
   throw 'not found';
 };
 
+const getRenderParams = ({ html = '', state = {}, enable = false }) => {
+  return {
+    __SSR__: enable,
+    __HTML__: html,
+    __STATE__: JSON.stringify(state)
+  };
+};
+
 module.exports = async function(ctx, viewpath, data) {
   const route = srcRoute(getRoute(url.parse(ctx.req.url).pathname));
+  const { ssr: ssrConfig } = data;
+
+  let viewData = {};
+
+  const queries = ctx.query || {};
+  if (ssrConfig && (config.env === 'production' || queries.__ssr)) {
+    const {type, entry} = ssrConfig;
+    const {html, state, enable} = await ssr[type]({entry, route: ctx.req.url});
+    viewData = await getRenderParams({ html, state, enable });
+  } else {
+    viewData = await getRenderParams({});
+  }
 
   if ((config.mirage && config.mirage.enable)
     && config.env === 'production') {
-    Object.assign(data, {
+    Object.assign(viewData, {
       __CACHES__: JSON.stringify(
         referer.next({route, limit: config.mirage.limit})
           .reduce((files, route) => {
@@ -46,9 +67,9 @@ module.exports = async function(ctx, viewpath, data) {
         writefile(abstmp(abs2rel(rel)), asset.html.link(rel));
       });
 
-    html = swig.compileFile(abstmp(viewpath))(data);
+    html = swig.compileFile(abstmp(viewpath))(viewData);
   } else {
-    html = swig.compileFile(absdest(viewpath))(data);
+    html = swig.compileFile(absdest(viewpath))(viewData);
   }
 
   const tags = [
@@ -66,8 +87,6 @@ module.exports = async function(ctx, viewpath, data) {
 
   // collect res
   if (config.env !== 'production') {
-    const page = {};
-
     //manifest.pages.remove(route);
     manifest.pages.set(route, 'html', viewpath);
 

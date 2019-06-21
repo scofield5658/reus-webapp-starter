@@ -11,8 +11,8 @@ module.exports = {
   timestamp: +new Date,
   env,
   test,
-  baseUrl: process.env.BASE_URL || '',
-  cdnUrl: process.env.CDN_URL || '',
+  baseUrl: process.env.BASE_URL || '/jagger',
+  cdnUrl: process.env.CDN_URL || '/jagger',
   assets: /\.(png|jpe?g|gif|svg|pdf|ico)(\?.*)?$/i,
   ...{
     // dev

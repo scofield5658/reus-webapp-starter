@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import App from './app.vue';
 import {createRouter, routes} from './router';
@@ -6,18 +5,19 @@ import {createStore} from './store';
 import {isBrowser, queryString, noop} from '../../../../helpers/utils';
 import config from '../../../../../config';
 
-// install plugins 
+// install plugins
 Vue.use(require('./plugins/timeout').default);
 Vue.use(require('./plugins/interval').default);
 
 const createApp = () => {
   const router = createRouter();
   const store = createStore();
+  console.log(router);
 
   // must use before inited
   if (isBrowser()) {
     // use navigation
-    Vue.use(require('vue-navigation').default, {router});
+    Vue.use(require('vue-navigation').default, { router });
     // replace vuex state
     window.__STATE__ && store.replaceState(window.__STATE__);
   }
@@ -35,7 +35,7 @@ const createApp = () => {
 
       let event = 'load';
 
-      // onload 
+      // onload
       const qs = queryString(location.href);
       if (!(config.env === 'production' || qs.__ssr)) {
         inst.showLoading();
@@ -47,7 +47,7 @@ const createApp = () => {
 
         inst.slideInView();
         inst.slideInLoading();
-      }); 
+      });
 
       app.$navigation.on('back', () => {
 
@@ -72,7 +72,7 @@ const createApp = () => {
           // make sure asyncData function is called firstly
           const promise = asyncData && asyncData({store, route: to});
 
-          // then next 
+          // then next
           next();
 
           return promise;
@@ -84,7 +84,7 @@ const createApp = () => {
           }
         });
       };
-      
+
       if (config.env === 'production' || qs.__ssr) {
         router.onReady(() => router.beforeResolve(beforeResolve));
       } else {

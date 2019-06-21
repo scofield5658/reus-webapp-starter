@@ -27,11 +27,12 @@ exports.getExtname = (pathname) => {
   return path.extname(pathname);
 };
 
-exports.calcMD5 = (str, len = 12) => {
+const calcMD5 = (str, len = 12) => {
   const crypto = require('crypto');
   const md5 = crypto.createHash('md5').update(str).digest('hex');
   return md5.substring(md5.length - len, md5.length);
 };
+exports.calcMD5 = calcMD5;
 
 exports.isEmpty = (val) => {
   return typeof val === 'undefined' || val === null;
@@ -49,7 +50,7 @@ exports.isEmptyObject = (obj) => {
   return true;
 };
 
-exports.mkdirs = (dirname) => {
+const mkdirs = (dirname) => {
   const fs = require('fs');
   const path = require('path');
   const dirs = dirname.split(path.sep);
@@ -60,6 +61,7 @@ exports.mkdirs = (dirname) => {
     }
   }
 };
+exports.mkdirs = mkdirs;
 
 exports.writefile = (filepath, content) => {
   const fs = require('fs');
@@ -117,15 +119,16 @@ exports.abstmp = (relpath) => {
   return path.join(__dirname, `../../.tmp/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
-exports.isBrowser = () => {
+const isBrowser = () => {
   return typeof window !== 'undefined';
 };
+exports.isBrowser = isBrowser;
 
 exports.isServer = () => {
   return !isBrowser();
 };
 
-exports.getData = (obj, key) => {
+const getData = (obj, key) => {
   if (obj == null) {
     return obj || null;
   }
@@ -151,8 +154,9 @@ exports.getData = (obj, key) => {
     return getData(tmp || null, props.join('.'));
   }
 };
+exports.getData = getData;
 
-exports.setData = (obj, key, value) => {
+const setData = (obj, key, value) => {
   const props = key.split('.');
   const prop = props.shift();
   if (props.length == 0) {
@@ -174,20 +178,8 @@ exports.setData = (obj, key, value) => {
     return arr[index] || (arr[index] = {});
   })(obj, prop);
   return setData(tmp, props.join('.'), value);
-
-
-
-  /*
-  const value = ((prop, obj) => {
-    const matches = prop.match(/(\w+)\[(\d+)\]/);
-    if (!matches) {
-      return obj[prop];
-    }
-    // array, like d5[3]
-    return (obj[matches[1]] || [])[matches[2]];
-  })(prop, obj);
-  */
 };
+exports.setData = setData;
 
 exports.radom = (m = 0, n = 100000000) => {
   return Math.floor(Math.random() * (n - m + 1)) + m;

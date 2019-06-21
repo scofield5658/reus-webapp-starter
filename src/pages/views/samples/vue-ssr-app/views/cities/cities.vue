@@ -1,22 +1,22 @@
 <template>
   <div class="cities">
     <div class="summary">
-      {{weather.city}}, 
-      {{weather.weather}}, 
-      {{weather.temperature}}°C, 
-      {{weather.winddirection}}风, 
+      {{weather.city}},
+      {{weather.weather}},
+      {{weather.temperature}}°C,
+      {{weather.winddirection}}风,
       {{weather.windpower}}级,
       湿度{{weather.humidity}}%
-    </div>  
+    </div>
     <div class="recommends">
-      <button class='ui-btn city' v-for='city in cities' @tap='goWeather(city)'>
+      <button class='ui-btn city' v-for='(city, index) in cities' :key='index' @tap='goWeather(city)'>
         {{city}}
       </button>
     </div>
-  </div>  
+  </div>
 </template>
 
-<style lang='postcss' scoped> 
+<style lang='postcss' scoped>
   .cities {
     padding: 20px;
 
@@ -36,7 +36,6 @@
 
 <script>
 import {mapState} from 'vuex';
-import {tgtRoute} from '../../../../../../helpers/utils';
 
 export default {
   data() {
@@ -58,7 +57,7 @@ export default {
   },
   methods: {
     goWeather(city) {
-      this.$router.push(tgtRoute(`/samples/vue-ssr-app/weather?city=${city}`));
+      this.$router.push(`/samples/vue-ssr-app/weather?city=${city}`);
     }
   },
   async asyncData({store}) {

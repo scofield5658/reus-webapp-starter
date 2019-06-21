@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         test: config.assets,
-        loader: './src/loaders/url.js'
+        loader: 'url-loader'
       }
     ]
   },

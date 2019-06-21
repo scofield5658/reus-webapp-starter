@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('../../config');
 const webpackConfig = require('../../webpack.config');
-const {abs2rel, abstmp, srcUrl, cpfile, isEmptyObject, radom} = require('../helpers/utils');
+const { abs2rel, abstmp, srcUrl, cpfile, isEmptyObject, radom } = require('../helpers/utils');
 const asset = require('../loaders/asset');
 const manifest = require('../loaders/manifest');
 

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div v-for='value, key in weather' class="ui-row ui-form-item ui-form-item-show ui-border-b">
+    <div v-for='(value, key) in weather' :key='key' class="ui-row ui-form-item ui-form-item-show ui-border-b">
       <span class="title ui-col ui-col-33">{{key}}</span>
       <span class="value ui-col ui-col-67">{{value}}</span>
     </div>
-  </div>  
+  </div>
 </template>
 
-<style lang='postcss' scoped> 
+<style lang='postcss' scoped>
   .title {
     color: #999;
   }

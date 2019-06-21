@@ -5,12 +5,12 @@ module.exports = {
   ...{
     // dev
     dev: {
-      
+
     },
 
     // production
     production: {
-      
+
     }
   }[test || env]
 };
