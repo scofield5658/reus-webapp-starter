@@ -13,8 +13,7 @@
   "plugins": [
     {
       "name": "reus-jagger-plugin",
-      "params": "./config/index.js",
-      "useRender": true
+      "params": "./config/index.js"
     }
   ]
 }
