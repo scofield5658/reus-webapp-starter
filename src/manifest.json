@@ -22,12 +22,22 @@
         "/pages/views/samples/reference/reference.js"
       ]
     },
+    "/samples/lazy-load": {
+      "html": "/pages/views/samples/lazy-load/lazy-load.swig",
+      "css": [
+        "/pages/components/reset.pcss?__chunk=vendor&__cache=true",
+        "/pages/views/samples/lazy-load/lazy-load.pcss"
+      ],
+      "js": [
+        "/pages/views/samples/lazy-load/__jquery.js?__chunk=vendor&__cache=true",
+        "/pages/views/samples/lazy-load/lazy-load.js"
+      ]
+    },
     "/samples/vue-ssr-app*": {
       "html": "/pages/views/samples/vue-ssr-app/app.swig",
       "css": [
         "/pages/components/reset.pcss?__chunk=vendor&__cache=true",
-        "/pages/components/reset.pcss?__chunk=vendor&__cache=true",
-        "/pages/vendors/frozenui/dist/css/frozen.css?__chunk=vendor&__cache=true&__compile=false",
+        "/pages/vendors/frozenui/css/frozen.css?__chunk=vendor&__cache=true&__compile=false",
         "/pages/views/samples/vue-ssr-app/app.pcss"
       ],
       "js": [
@@ -40,6 +50,17 @@
         "/pages/views/samples/vue-ssr-app/__axios.js?__chunk=vendor&__cache=true",
         "/pages/views/samples/vue-ssr-app/__base-64.js?__chunk=vendor&__cache=true",
         "/pages/views/samples/vue-ssr-app/app.js"
+      ]
+    },
+    "/samples/calculator": {
+      "html": "/pages/views/samples/calculator/calculator.swig",
+      "css": [
+        "/pages/components/reset.pcss?__chunk=vendor&__cache=true",
+        "/pages/views/samples/calculator/calculator.pcss"
+      ],
+      "js": [
+        "/pages/views/samples/calculator/__jquery.js?__chunk=vendor&__cache=true",
+        "/pages/views/samples/calculator/calculator.js"
       ]
     },
     "/samples/mirage": {

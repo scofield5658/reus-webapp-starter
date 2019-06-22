@@ -10,10 +10,11 @@
     "domain": "",
     "files": ["./src/pages"]
   },
-  "buildPlugins": [
+  "plugins": [
     {
-      "name": "compile",
-      "params": {}
+      "name": "reus-jagger-plugin",
+      "params": "./config/index.js",
+      "useRender": true
     }
   ]
 }
