@@ -7873,10 +7873,10 @@ ret@~0.1.10:
   resolved "https://registry.npm.taobao.org/ret/download/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha1-uKSCXVvbH8P29Twrwz+BOIaBx7w=
 
-reus-jagger-plugin@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/reus-jagger-plugin/-/reus-jagger-plugin-0.3.0.tgz#5a8a1e17c8d3e16b3f0213f23af78afbd9293f3f"
-  integrity sha512-49MznJULIhGIePYchan/s3H2xFe2oBUQIrgoutcaMZwmizrDAP6qkl/bRIuMoZcmPrbq1qlvYvoM08azg2C9sA==
+reus-jagger-plugin@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/reus-jagger-plugin/-/reus-jagger-plugin-0.3.1.tgz#c31cec7d74379d9b3821baad7b3e937aeb7f4d3a"
+  integrity sha512-YlddHm+lmsb2QIalx/c76TGLpV+Quqt96Euyi0mLsqfOqUERO4k7gt8xoVMIpudLY2DboFPdlW0zSgAo2tCJZA==
   dependencies:
     autoprefixer "^7.2.5"
     babel-core "^6.26.0"
@@ -7913,10 +7913,10 @@ reus-jagger-plugin@^0.3.0:
     vue-template-compiler "^2.6.10"
     webpack "^3.12.0"
 
-reus.js@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/reus.js/-/reus.js-1.0.7.tgz#74cc6f11a390be2b144102d70f704c7761470b53"
-  integrity sha512-dpt7a+/gqYVSsOQGhfgHD3bVY3R5Nid3XFsEDIhoCvAQlEixxgQDWSsUwljo3GQTFpyHBt+fitmdotDHAwC9Dg==
+reus.js@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/reus.js/-/reus.js-1.1.0.tgz#53c44ea27f25aeb65915d591253713f4e53e4d94"
+  integrity sha512-e35Qus56ulvOdTAo0wcEKsCCbCbiDvb8dagEIrgjs/TMzbtouWyhwyvEBQDKUJ+DmlfegXp1SqJoOQx6utqcWw==
   dependencies:
     browser-sync "2.26.7"
     commander "^2.17.1"
