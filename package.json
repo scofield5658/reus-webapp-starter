@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
+  "author": "guozhi <zhi.guo@geekthings.com.cn>",
   "scripts": {
     "start": "cross-env NODE_ENV=dev reus launch . --mode dev",
     "build": "cross-env NODE_ENV=production reus build .",
