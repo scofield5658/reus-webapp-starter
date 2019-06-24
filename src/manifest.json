@@ -37,6 +37,7 @@
       "html": "/pages/views/samples/vue-ssr-app/app.swig",
       "css": [
         "/pages/components/reset.pcss?__chunk=vendor&__cache=true",
+        "/pages/components/reset.pcss?__chunk=vendor&__cache=true",
         "/pages/vendors/frozenui/css/frozen.css?__chunk=vendor&__cache=true&__compile=false",
         "/pages/views/samples/vue-ssr-app/app.pcss"
       ],
