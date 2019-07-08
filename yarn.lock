@@ -7873,10 +7873,10 @@ ret@~0.1.10:
   resolved "https://registry.npm.taobao.org/ret/download/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha1-uKSCXVvbH8P29Twrwz+BOIaBx7w=
 
-reus-jagger-plugin@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/reus-jagger-plugin/-/reus-jagger-plugin-0.3.1.tgz#c31cec7d74379d9b3821baad7b3e937aeb7f4d3a"
-  integrity sha512-YlddHm+lmsb2QIalx/c76TGLpV+Quqt96Euyi0mLsqfOqUERO4k7gt8xoVMIpudLY2DboFPdlW0zSgAo2tCJZA==
+reus-jagger-plugin@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/reus-jagger-plugin/-/reus-jagger-plugin-0.4.2.tgz#38a958d50ec4ef885c60f79f217136e8acee6647"
+  integrity sha512-KPkdRBeRKekSf1wKGJ/VRKtFLCZ+m/8dnHcgYnLcu3wjtY8V2QafGMp64jqPu0WIVGhB3GgCNlSSMuGgwEtNvw==
   dependencies:
     autoprefixer "^7.2.5"
     babel-core "^6.26.0"
@@ -7893,9 +7893,40 @@ reus-jagger-plugin@^0.3.1:
     gulp-clean-css "^4.2.0"
     gulp-concat "^2.6.1"
     gulp-uglify "^3.0.2"
-    html-minifier "^3.5.21"
     koa-mount "^3.0.0"
     koa-static "^4.0.3"
+    loader-utils "^1.1.0"
+    postcss "^6.0.14"
+    postcss-loader "^3.0.0"
+    postcss-modules-extract-imports "^1.1.0"
+    precss "^2.0.0"
+    qs "^6.7.0"
+    string-replace-loader "^1.3.0"
+    style-loader "^0.23.1"
+    swig "^1.4.2"
+    url "^0.11.0"
+    url-loader "^1.1.2"
+    vue-loader "^13.6.1"
+    webpack "^3.12.0"
+
+reus-swig-plugin@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/reus-swig-plugin/-/reus-swig-plugin-0.0.3.tgz#e419a39f25ff088c5655e7882c934be6dc4667f9"
+  integrity sha512-jq6g7/6+TOuvp5djkZN58bXEzj32nRONwT8u6l/8YHPlJqLHgQIvmn0Dov3nRG+FJKdIqEXUtstxfE5KXykS1Q==
+  dependencies:
+    autoprefixer "^7.2.5"
+    babel-core "^6.26.0"
+    babel-eslint "^8.0.2"
+    babel-loader "^7.1.5"
+    babel-plugin-syntax-dynamic-import "^6.18.0"
+    babel-plugin-transform-decorators-legacy "^1.3.4"
+    babel-plugin-transform-object-rest-spread "^6.26.0"
+    babel-plugin-transform-runtime "^6.23.0"
+    babel-preset-env "^1.6.1"
+    css-loader "^0.28.11"
+    eslint-plugin-html "^4.0.1"
+    extract-text-webpack-plugin "^3.0.2"
+    html-minifier "^3.5.21"
     loader-utils "^1.1.0"
     postcss "^6.0.14"
     postcss-loader "^3.0.0"
@@ -7913,10 +7944,10 @@ reus-jagger-plugin@^0.3.1:
     vue-template-compiler "^2.6.10"
     webpack "^3.12.0"
 
-reus.js@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/reus.js/-/reus.js-1.1.0.tgz#53c44ea27f25aeb65915d591253713f4e53e4d94"
-  integrity sha512-e35Qus56ulvOdTAo0wcEKsCCbCbiDvb8dagEIrgjs/TMzbtouWyhwyvEBQDKUJ+DmlfegXp1SqJoOQx6utqcWw==
+reus.js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/reus.js/-/reus.js-1.1.1.tgz#c2d805f15084c22ffc54ff2c303f0891096446e5"
+  integrity sha512-g9Mx9Ozg4vgQSnujmRF2ERC/KA4oiVxdrzVf9zD8cxv828uMwnG2+LDY61CyMQbNx6uJ8rAyC0plJnTvKYrzQw==
   dependencies:
     browser-sync "2.26.7"
     commander "^2.17.1"
