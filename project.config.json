@@ -16,7 +16,7 @@
       "params": "./config/index.js"
     },
     {
-      "name": "reus-swig-plugin",
+      "name": "reus-pug-plugin",
       "params": "./config/index.js"
     }
   ]

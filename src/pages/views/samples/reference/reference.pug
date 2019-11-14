@@ -1,0 +1,24 @@
+extends ../../../layouts/index.pug
+
+block body
+
+  css(src='./reference.pcss')
+  js(src="jquery" chunk="vendor" cache="true")
+  js(src='./reference.js')
+
+  div
+    div
+      p Images In HTML
+      img(src='./logo.jpg' width='100px' height='100px')
+    br
+    div
+      p Images In Separate CSS
+      div(class='logo')
+    br
+    div
+      p Images In In-line CSS
+      div(style='width:100px;height:100px;background:url(./logo.jpg);background-size: cover;')
+    br
+    div
+      p Images In JS
+      div(id='logo')

@@ -4,8 +4,8 @@
         <p class='text'>
           {{content}}
         </p>
-    </div> 
-  </transition> 
+    </div>
+  </transition>
 </template>
 
 <style lang='postcss' scoped>

@@ -1,0 +1,17 @@
+
+extends ../../../layouts/index.pug
+
+block body
+  css(src="../../../vendors/frozenui/css/frozen.css" chunk="vendor" cache="true" compile="false")
+  css(src="./app.pcss")
+
+  js(src="../../../vendors/zepto/zepto.js" chunk="vendor" cache="true" compile="false")
+  js(src="../../../components/tap.js" chunk="vendor" cache="true")
+  js(src="./app.js")
+
+  if __SSR__
+    div(style="width:100%;height:100%") !{__HTML__}
+    script(type="text/javascript").
+      window.__STATE__ = !{__STATE__};
+  else
+    #app

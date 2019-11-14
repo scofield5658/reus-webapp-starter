@@ -8,11 +8,11 @@
           <div v-html="content"></div>
         </div>
         <div class="ui-dialog-ft">
-          <button v-for="button, index in buttons" :data-index="index" type="button" data-role="button" @tap='onSelect(index)'>
+          <button v-for="(button, index) in buttons" :key="index" :data-index="index" type="button" data-role="button" @tap='onSelect(index)'>
             {{button}}
           </button>
         </div>
-    </div>        
+    </div>
   </div>
 </template>
 

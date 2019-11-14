@@ -1,39 +1,48 @@
 module.exports = {
-  "parser": "babel-eslint",
+  "root": true,
   "env": {
     "browser": true,
     "es6": true,
     "node": true,
     "jest": true
   },
-  "extends": "eslint:recommended",
   "parserOptions": {
     "sourceType": "module"
   },
   "ecmaFeatures": {
     "destructuring": true
   },
-  plugins: [
-    'html', //插件，此插件用于识别文件中的js代码，没有MIME类型标识没有script标签也可以识别到，因此拿来识别.vue文件中的js代码
-    'testcafe'
+  "extends": [
+    'plugin:vue/essential',
+    // "plugin:react/recommended",
+    'airbnb'
   ],
-  "extends": "plugin:testcafe/recommended",
+  "plugins": [
+    'vue',
+    // "react",
+  ],
   "rules": {
-    "indent": [
-      "error",
-      2
-    ],
-    "linebreak-style": 'off',
+    "indent": ["error", 2],
+    "linebreak-style": "off",
     "quotes": [
       "error",
-      "single"
+      "double"
     ],
     "semi": [
       "error",
       "always"
     ],
-    'no-console': 'off',
-    'no-debugger': 'off',
-    "experimentalDecorators": true
+    "no-console": "off",
+    "no-debugger": "off",
+    "experimentalDecorators": "off",
+    "no-restricted-syntax": "off",
+    "no-restricted-globals": "off",
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
+    "import/no-webpack-loader-syntax": "off",
+    "vue/no-duplicate-attributes": "off",
+    "no-param-reassign": "off",
+    "max-len": "off",
+    "global-require": "off",
   },
 };

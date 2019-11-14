@@ -1,9 +1,3 @@
-/**
- * User: jeakeyliang
- * Date: 14-11-07
- * Time: 下午9:20
- */
-
 !function($){
 
 	// 默认模板
@@ -13,7 +7,7 @@
 		      '<p><%=content%></p>'+
 		   '</div>'+
 		 '</div>';
-	
+
 	// 默认参数
 	var defaults={
 		content:'加载中...'
@@ -31,7 +25,7 @@
 			var e=$.Event('loading:show');
 			this.element.trigger(e);
 			this.element.show();
-			
+
 		},
 		hide :function () {
 			var e=$.Event('loading:hide');
@@ -45,5 +39,3 @@
 	}
 	$.fn.loading=$.loading= Plugin;
 }(window.Zepto)
-	
-

@@ -1,13 +1,12 @@
-
 export default {
   install(Vue) {
     Vue.mixin({
-      created: function () {
+      created() {
         this.__timeoutids = [];
       },
-      destroyed: function () {
+      beforeDestroy() {
         this.__timeoutids.forEach(clearTimeout);
-      }
+      },
     });
 
     Vue.prototype.$setTimeout = function (handler, delay = 0) {
@@ -23,5 +22,5 @@ export default {
     Vue.prototype.$clearAllTimeouts = function () {
       this.__timeoutids.forEach(clearTimeout);
     };
-  }
+  },
 };

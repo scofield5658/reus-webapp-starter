@@ -1,9 +1,3 @@
-/**
- * User: jeakeyliang
- * Date: 14-08-22
- * Time: 下午9:20
- */
-
 !function($){
 
 	// 默认模板
@@ -23,7 +17,7 @@
 				'<% } %>' +
 				'<% } %>' +
             '</div>'+
-        '</div>'+        
+        '</div>'+
     '</div>';
 	// 默认参数
 	var defaults={
@@ -77,7 +71,7 @@
 			self.element.trigger($.Event("dialog:hide"));
 			self.element.off("touchmove" , _stopScroll);
 			self.element.removeClass("show");
-			
+
 			self._isFromTpl&&self.element.remove();
 		}
 	}
@@ -91,5 +85,3 @@
 	}
 	$.fn.dialog=$.dialog= Plugin;
 }(window.Zepto)
-	
-

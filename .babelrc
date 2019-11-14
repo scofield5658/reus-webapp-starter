@@ -8,11 +8,16 @@
           "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
         }
       }
-    ]
+    ], "react"
   ],
   "plugins": [
     "transform-runtime",
     "syntax-dynamic-import",
     "transform-object-rest-spread",
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      "style": "css"
+    }]
   ]
 }

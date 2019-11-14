@@ -1,4 +1,4 @@
-;(function ($) {
+!(function ($) {
 
 var rAF = window.requestAnimationFrame	||
 	window.webkitRequestAnimationFrame	||
@@ -48,7 +48,7 @@ var utils = (function () {
 
 
 	me.addEvent = function (el, type, fn, capture) {
-		el.addEventListener(type, fn, !!capture);	
+		el.addEventListener(type, fn, !!capture);
 	};
 
 
@@ -58,7 +58,7 @@ var utils = (function () {
 
 
 	me.prefixPointerEvent = function (pointerEvent) {
-		return window.MSPointerEvent ? 
+		return window.MSPointerEvent ?
 			'MSPointer' + pointerEvent.charAt(9).toUpperCase() + pointerEvent.substr(10):
 			pointerEvent;
 	};
@@ -139,7 +139,7 @@ var utils = (function () {
 	};
 
 
-	/* 
+	/*
 	 * 配合 config 里面的 preventDefaultException 属性
 	 * 不对匹配到的 element 使用 e.preventDefault()
 	 * 默认阻止所有事件的冒泡，包括 click 或 tap
@@ -277,7 +277,7 @@ function Scroll(el, options) {
 
 	    bindToWrapper : true,		// 事件是否绑定到 wrapper 元素上，否则大部分绑定到 window（若存在嵌套，则绑定在元素上最好）
     	resizePolling : 60,			// resize 时候隔 60ms 就执行 refresh 方法重新获取位置信息(事件节流)
-    	
+
     	disableMouse : false,		// 是否禁用鼠标
 	    disableTouch : false,		// 是否禁用touch事件
 	    disablePointer : false,		// 是否禁用win系统的pointer事件
@@ -325,7 +325,7 @@ function Scroll(el, options) {
 		this.itemWidth = this.scroller.children[0].clientWidth;
 		this.scrollWidth = this.itemWidth * this.count;
 
-		
+
 
 		if (this.options.indicator) {
 			var temp = '<ul class="ui-slider-indicators">';
@@ -478,7 +478,7 @@ Scroll.prototype = {
 		}
 	},
 
-	
+
 	refresh: function () {
 		var rf = this.wrapper.offsetHeight;	// Force reflow
 
@@ -489,7 +489,7 @@ Scroll.prototype = {
 
 
 		// 添加 wrapper 的 padding 值到 scroller 身上，更符合使用预期
-		var matrix = window.getComputedStyle(this.wrapper, null); 
+		var matrix = window.getComputedStyle(this.wrapper, null);
 		var pt = matrix['padding-top'].replace(/[^-\d.]/g, ''),
 			pb = matrix['padding-bottom'].replace(/[^-\d.]/g, ''),
 			pl = matrix['padding-left'].replace(/[^-\d.]/g, ''),
@@ -538,8 +538,8 @@ Scroll.prototype = {
 		this.wrapperOffset = utils.offset(this.wrapper);
 		this.resetPosition();
 	},
-	
-	
+
+
 	handleEvent: function (e) {
 		switch ( e.type ) {
 			case 'touchstart':
@@ -680,7 +680,7 @@ Scroll.prototype = {
 		this.distY		+= deltaY;
 		absDistX		= Math.abs(this.distX);
 		absDistY		= Math.abs(this.distY);
-		
+
 
 		// 如果在很长的时间内只移动了少于 10 像素的距离，那么不会触发惯性滚动
 		if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
@@ -700,7 +700,7 @@ Scroll.prototype = {
 		if ( this.directionLocked == 'h' ) {
 			// slider/tab 外层高度自适应
 			if (this.options.role === 'tab') {
-				$(this.scroller).children('li').height('auto');	
+				$(this.scroller).children('li').height('auto');
 			}
 			if ( this.options.eventPassthrough == 'vertical' ) {
 				e.preventDefault();
@@ -722,7 +722,7 @@ Scroll.prototype = {
 
 		deltaX = this.hasHorizontalScroll ? deltaX : 0;
 		deltaY = this.hasVerticalScroll ? deltaY : 0;
-		
+
 		newX = this.x + deltaX;
 		newY = this.y + deltaY;
 
@@ -773,11 +773,11 @@ Scroll.prototype = {
 		this.isInTransition = 0;
 		this.initiated = 0;
 		this.endTime = utils.getTime();
-	
+
 
 		if ( this.resetPosition(this.options.bounceTime) ) {	// reset if we are outside of the boundaries
 			if (this.options.role === 'tab') {
-				$(this.scroller.children[this.currentPage]).siblings('li').height(0);	
+				$(this.scroller.children[this.currentPage]).siblings('li').height(0);
 			}
 			return;
 		}
@@ -971,7 +971,7 @@ Scroll.prototype = {
 
 			if (this.options.role === 'slider' || this.options.role === 'tab') {	// 不添加判断会影响 left/top 的过渡
 				time = this.options.duration;
-				this.scrollerStyle[utils.style.transitionProperty] = utils.style.transform;	
+				this.scrollerStyle[utils.style.transitionProperty] = utils.style.transform;
 			}
 			this.scrollerStyle[utils.style.transitionTimingFunction] = easing.style;
 			this._transitionTime(time);
@@ -1051,7 +1051,7 @@ Scroll.prototype = {
 		return { x: x, y: y };
 	},
 
-	
+
 	_animate: function (destX, destY, duration, easingFn) {	// 当浏览器不支持 transition 时提供的退化方案 requestAnimationFrame
 		var that = this,
 			startX = this.x,
@@ -1092,7 +1092,7 @@ Scroll.prototype = {
 	_autoplay: function() {
 		var self = this,
 			curPage = self.currentPage;
-		
+
 		self.currentPage = self.currentPage >= self.count-1 ? 0 : ++self.currentPage;
 		self._execEvent('beforeScrollStart', curPage, self.currentPage);	// 对于自动播放的 slider/tab，这个时机就是 beforeScrollStart
 

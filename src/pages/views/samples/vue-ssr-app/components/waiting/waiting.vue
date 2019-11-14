@@ -5,7 +5,7 @@
           <i class='ui-loading-bright'></i>
           <p>请稍候</p>
       </div>
-    </div> 
+    </div>
   </div>
 </template>
 

@@ -1,9 +1,10 @@
-const { Middleware } = require('reus.js');
+const { Middleware } = require("reus.js");
+const logger = require("../helpers/logger");
 
 class LogMiddleware extends Middleware {
   async index() {
     const { ctx, next } = this;
-    console.log(`[${new Date()}]${ctx.url}:${ctx.method}`);
+    logger.info(`${ctx.url}:${ctx.method}`);
     return next();
   }
 }

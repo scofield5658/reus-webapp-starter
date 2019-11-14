@@ -2,7 +2,7 @@
   <div id='app'>
     <transition :name='view.slide'>
       <router-view class='__view'>
-      </router-view> 
+      </router-view>
     </transition>
 
     <div class='__view __loading leave'>
@@ -11,7 +11,7 @@
             <i class='ui-loading-bright'></i>
             <p>请稍候</p>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </template>
@@ -54,7 +54,7 @@
     &.leave {
       transform: translate3d(100%, 0, 0);
     }
-  }   
+  }
 
   .__slide-in-enter-active,
   .__slide-in-leave-active,
@@ -73,7 +73,7 @@
   .__slide-out-leave-to {
     transform: translate3d(100%, 0, 0);
   }
-    
+
 </style>
 
 <script>
@@ -114,16 +114,6 @@ export default {
         $loading.removeClass('leave').addClass('enter');
       }, 1000 / 60);
 
-
-      //
-      /*
-      this.loading.slide = '';
-      this.loading.visiable = true;
-      this.loading.timeout = this.$setTimeout(() => {
-        this.loading.slide = 'enter-to';
-        this.showLoading();
-      }, 1000 / 60);
-      */
     },
     slideOutLoading() {
       if (!isBrowser()) {
@@ -137,11 +127,6 @@ export default {
         $loading.removeClass('enter').addClass('leave');
       }, 1000 / 60);
 
-      /*
-      setTimeout(() => {
-        this.loading.slide = '';
-      }, 1000 / 60);
-      */
     },
     showLoading() {
       if (!isBrowser()) {
@@ -152,15 +137,7 @@ export default {
       const $loading = $('#app > .__loading');
 
       $loading.removeClass('enter animate').addClass('leave').show();
-      /*
-      this.loading.slide = 'enter-to';
-      this.loading.visiable = true;
-      this.loading.waiting = false;
 
-      this.$setTimeout(() => {
-        this.loading.waiting = true;
-      }, 300);
-      */
     },
     hideLoading() {
       if (!isBrowser()) {
@@ -172,13 +149,6 @@ export default {
 
       $loading.removeClass('animate enter leave').hide();
 
-      /*
-      this.$clearTimeout(this.loading.timeout);
-
-      this.loading.slide = '';
-      this.loading.visiable = false;
-      this.loading.waiting = false;
-      */
     }
   }
 };

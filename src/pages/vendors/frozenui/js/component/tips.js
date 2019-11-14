@@ -1,9 +1,3 @@
-/**
- * User: jeakeyliang
- * Date: 14-11-07
- * Time: 下午9:20
- */
-
 !function($){
 
 	// 默认模板
@@ -12,7 +6,7 @@
     				'<i></i><%=content%>'+
 					'</div>'+
 				'</div>';
-	
+
 	// 默认参数
 	var defaults={
 		content:'',
@@ -37,7 +31,7 @@
 			});
 			self.show();
 		},20);
-		
+
 	}
 	Tips.prototype={
 		show:function(){
@@ -62,8 +56,8 @@
 			setTimeout(function(){
 				self._isFromTpl&&self.element.remove();
 			},500)
-				
-			
+
+
 		}
 	}
 	function Plugin(option) {
@@ -72,5 +66,3 @@
 	}
 	$.fn.tips=$.tips= Plugin;
 }(window.Zepto)
-	
-

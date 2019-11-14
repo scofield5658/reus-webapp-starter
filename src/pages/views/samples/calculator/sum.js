@@ -1,4 +1,1 @@
-
-export default (num0, num1) => {
-  return (num0 || '' - 0) + (num1 || '' - 0);
-};
+export default (num0, num1) => (num0 || "" - 0) + (num1 || "" - 0);

@@ -1,14 +1,12 @@
-
-
 export default {
   install(Vue) {
     Vue.mixin({
-      created: function () {
+      created() {
         this.__intervalids = [];
       },
-      destroyed: function () {
+      destroyed() {
         this.__intervalids.forEach(clearInterval);
-      }
+      },
     });
 
     Vue.prototype.$setInterval = function (handler, delay = 0, immediate = false) {
@@ -29,5 +27,5 @@ export default {
     Vue.prototype.$clearAllIntervals = function () {
       this.__intervalids.forEach(clearInterval);
     };
-  }
+  },
 };

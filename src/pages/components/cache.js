@@ -1,15 +1,15 @@
-import $ from 'Zepto';
-import config from '../../../config';
+import $ from "Zepto"; /* eslint-disable-line */
+import config from "../../../config";
 
 $(() => {
-  if (!config.mirage || !config.mirage.enable 
-    || config.env !== 'production') {
+  if (!config.mirage || !config.mirage.enable
+    || config.env !== "production") {
     return;
   }
 
   const caches = window.__CACHES__ || [];
   for (const cache of caches) {
-    const image = new Image;
+    const image = new Image();
     image.src = cache;
   }
 });

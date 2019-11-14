@@ -1,5 +1,4 @@
-const env = process.env.NODE_ENV || 'production';
-const test = process.env.TEST_ENV || '';
+const env = process.env.NODE_ENV || "production";
 
 module.exports = {
   ...{
@@ -11,6 +10,6 @@ module.exports = {
     // production
     production: {
 
-    }
-  }[test || env]
+    },
+  }[env],
 };

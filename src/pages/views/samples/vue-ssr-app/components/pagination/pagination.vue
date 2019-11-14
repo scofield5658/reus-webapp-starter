@@ -6,12 +6,12 @@
     </div>
     <div v-if="status == 'done'" class="ui-loading-wrap wrap">
       没有更多了
-    </div>  
+    </div>
     <div v-if="status == 'fail'" class="ui-loading-wrap wrap" @tap="retry">
       出错啦，点击重试
     </div>
-  </div>  
-  
+  </div>
+
 </template>
 
 <style lang='postcss' scoped>
@@ -28,7 +28,7 @@ import {isBrowser} from '../../../../../helpers/utils';
 export default {
   data() {
     return {
-      status: 'loading'  // loading, 
+      status: 'loading'  // loading,
     };
   },
   mounted() {

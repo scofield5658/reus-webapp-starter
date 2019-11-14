@@ -1,4 +1,4 @@
-const Samples = require('./samples');
+const Samples = require("./samples");
 
 module.exports = [
   ...Samples,

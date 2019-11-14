@@ -1,60 +1,51 @@
-const config = require('../../config');
+const config = require("../../config");
 
-exports.noop = function(){};
+exports.noop = () => {};
 
-exports.tgtRoute = (route) => {
-  return (`${config.baseUrl}${route}`).replace(/\\/gmi, '/');
-};
+exports.tgtRoute = (route) => (`${config.baseUrl}${route}`).replace(/\\/gmi, "/");
 
-exports.srcRoute = (url) => {
-  return (url.replace(new RegExp(`^${config.baseUrl}`), '')).replace(/\\/gmi, '/');
-};
+exports.srcRoute = (url) => (url.replace(new RegExp(`^${config.baseUrl}`), "")).replace(/\\/gmi, "/");
 
 exports.tgtURL = (url) => {
-  const tgtBase = config.env == 'production' ?
-    config.cdnUrl : config.baseUrl;
-  return (`${tgtBase}${url.replace(/\\/gmi, '/').replace(/^\/pages/, '')}`).replace(/\\/gmi, '/');
+  const tgtBase = config.env === "production"
+    ? config.cdnUrl : config.baseUrl;
+  return (`${tgtBase}${url.replace(/\\/gmi, "/").replace(/^\/pages/, "")}`).replace(/\\/gmi, "/");
 };
 
 exports.srcUrl = (url) => {
-  const tgtBase = config.env == 'production' ?
-    config.cdnUrl : config.baseUrl;
-  return (url.replace(new RegExp(`^${tgtBase}`), '/pages')).replace(/\\/gmi, '/');
+  const tgtBase = config.env === "production"
+    ? config.cdnUrl : config.baseUrl;
+  return (url.replace(new RegExp(`^${tgtBase}`), "/pages")).replace(/\\/gmi, "/");
 };
 
 exports.getExtname = (pathname) => {
-  const path = require('path');
+  const path = require("path");
   return path.extname(pathname);
 };
 
 const calcMD5 = (str, len = 12) => {
-  const crypto = require('crypto');
-  const md5 = crypto.createHash('md5').update(str).digest('hex');
+  const crypto = require("crypto");
+  const md5 = crypto.createHash("md5").update(str).digest("hex");
   return md5.substring(md5.length - len, md5.length);
 };
 exports.calcMD5 = calcMD5;
 
-exports.isEmpty = (val) => {
-  return typeof val === 'undefined' || val === null;
-};
+exports.isEmpty = (val) => typeof val === "undefined" || val === null;
 
 exports.isEmptyObject = (obj) => {
-  if (typeof obj !== 'object') {
+  if (typeof obj !== "object") {
     return false;
   }
 
-  for (const key in obj) {
-    return false;
-  }
-
-  return true;
+  const keys = Object.keys(obj);
+  return !keys.length;
 };
 
 const mkdirs = (dirname) => {
-  const fs = require('fs');
-  const path = require('path');
+  const fs = require("fs");
+  const path = require("path");
   const dirs = dirname.split(path.sep);
-  for (let i = 1, ii = dirs.length; i < ii; i++) {
+  for (let i = 1, ii = dirs.length; i < ii; i += 1) {
     const tmp = dirs.slice(0, i + 1).join(path.sep);
     if (!fs.existsSync(tmp)) {
       fs.mkdirSync(tmp);
@@ -64,29 +55,27 @@ const mkdirs = (dirname) => {
 exports.mkdirs = mkdirs;
 
 exports.writefile = (filepath, content) => {
-  const fs = require('fs');
-  const path = require('path');
+  const fs = require("fs");
+  const path = require("path");
   mkdirs(path.dirname(filepath));
   fs.writeFileSync(filepath, content);
 };
 
 exports.hashfile = (filepath) => {
-  const fs = require('fs');
-  const path = require('path');
+  const fs = require("fs");
+  const path = require("path");
   const buffer = fs.readFileSync(filepath);
   const hash = calcMD5(buffer);
 
   return {
-    name: path.basename(filepath).replace(/\.\w+$/, ($0) => {
-      return `.${hash}${$0}`;
-    }),
-    buffer
+    name: path.basename(filepath).replace(/\.\w+$/, ($0) => `.${hash}${$0}`),
+    buffer,
   };
 };
 
-exports.cpfile = ({from, to}) => {
-  const fs = require('fs');
-  const path = require('path');
+exports.cpfile = ({ from, to }) => {
+  const fs = require("fs");
+  const path = require("path");
 
   mkdirs(path.dirname(to));
 
@@ -94,120 +83,115 @@ exports.cpfile = ({from, to}) => {
 };
 
 exports.rel2abs = (relpath) => {
-  const path = require('path');
+  const path = require("path");
   return path.join(__dirname, `..${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
 exports.abs2rel = (abspath) => {
-  const path = require('path');
-  const basedir = path.join(__dirname, '../..').replace(/\\/gmi, '/');
-  return abspath.replace(/\\/gmi, '/').replace(new RegExp(`^${basedir}/[^/]+`), '').replace(/\//gmi, path.sep);
+  const path = require("path");
+  const basedir = path.join(__dirname, "../..").replace(/\\/gmi, "/");
+  return abspath.replace(/\\/gmi, "/").replace(new RegExp(`^${basedir}/[^/]+`), "").replace(/\//gmi, path.sep);
 };
 
 exports.abssrc = (relpath) => {
-  const path = require('path');
+  const path = require("path");
   return path.join(__dirname, `../../src/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
 exports.absdest = (relpath) => {
-  const path = require('path');
+  const path = require("path");
   return path.join(__dirname, `../../dist/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
 exports.abstmp = (relpath) => {
-  const path = require('path');
+  const path = require("path");
   return path.join(__dirname, `../../.tmp/${path.sep}${relpath}`).replace(/\//gmi, path.sep);
 };
 
-const isBrowser = () => {
-  return typeof window !== 'undefined';
-};
+const isBrowser = () => typeof window !== "undefined";
 exports.isBrowser = isBrowser;
 
-exports.isServer = () => {
-  return !isBrowser();
-};
+exports.isServer = () => !isBrowser();
 
 const getData = (obj, key) => {
-  if (obj == null) {
+  if (obj === null) {
     return obj || null;
   }
 
-  const props = key.split('.');
+  const props = key.split(".");
   const prop = props.shift();
-  const tmp = ((obj, prop) => {
-    const matches = prop.match(/(\w*)\[(\w+)\]/);
+  const tmp = ((inObj, inProp) => {
+    const matches = inProp.match(/(\w*)\[(\w+)\]/);
     if (!matches) {
-      return obj[prop];
+      return inObj[inProp];
     }
 
-    const tmp = matches[1] ?
-      (obj[matches[1]] || []) : obj;
+    const inTmp = matches[1]
+      ? (inObj[matches[1]] || []) : inObj;
 
     // array, like d5[3]
-    return tmp[matches[2]];
+    return inTmp[matches[2]];
   })(obj, prop);
 
-  if (props.length == 0) {
+  if (props.length === 0) {
     return tmp || null;
-  } else {
-    return getData(tmp || null, props.join('.'));
   }
+  return getData(tmp || null, props.join("."));
 };
 exports.getData = getData;
 
 const setData = (obj, key, value) => {
-  const props = key.split('.');
+  const props = key.split(".");
   const prop = props.shift();
-  if (props.length == 0) {
-    return obj[prop] = value;
+  if (props.length === 0) {
+    obj[prop] = value;
+    return obj[prop];
   }
 
-  //obj[prop] || (obj[prop] = {})
-  const tmp = ((obj, prop) => {
+  const tmp = ((inObj, inProp) => {
     const matches = prop.match(/(\w+)\[(\w+)\]/);
-    // normal obj
     if (!matches) {
-      return obj[prop] || (obj[prop] = {});
+      if (!inObj[inProp]) {
+        inObj[inProp] = {};
+      }
+      return inObj[inProp];
     }
 
-    // array, like d5[3]
-    const key = matches[1];
+    const inKey = matches[1];
     const index = matches[2];
-    const arr = obj[key] || (obj[key] = []);
-    return arr[index] || (arr[index] = {});
+    const arr = inObj[inKey] || (inObj[inKey] = []);
+    if (!arr[index]) {
+      arr[index] = {};
+    }
+    return arr[index];
   })(obj, prop);
-  return setData(tmp, props.join('.'), value);
+  return setData(tmp, props.join("."), value);
 };
 exports.setData = setData;
 
-exports.radom = (m = 0, n = 100000000) => {
-  return Math.floor(Math.random() * (n - m + 1)) + m;
-};
+exports.radom = (m = 0, n = 100000000) => Math.floor(Math.random() * (n - m + 1)) + m;
 
 exports.queryString = (url) => {
   const qs = {};
-  var matches = url.match(/[^=?&#]+=[^=?&#]+/g);
+  const matches = url.match(/[^=?&#]+=[^=?&#]+/g);
   if (matches) {
     for (const match of matches) {
-      const kv = match.split('=');
-      qs[kv[0]] = kv[1];
+      const [k, v] = match.split("=");
+      qs[k] = v;
     }
   }
   return qs;
 };
 
-exports.sleep = (delay) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, delay);
-  });
-};
+exports.sleep = (delay) => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve();
+  }, delay);
+});
 
 exports.range = (start, end) => {
   const arr = [];
-  for (let i = start; i <= end; i++) {
+  for (let i = start; i <= end; i += 1) {
     arr.push(i);
   }
   return arr;
@@ -226,42 +210,25 @@ exports.getDateTime = (s) => {
 
 exports.getFormatDate = (date, format) => {
   const obj = {
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds(),
-    'q+': Math.floor((date.getMonth() + 3) / 3),
-    'S': date.getMilliseconds()
+    "M+": date.getMonth() + 1,
+    "d+": date.getDate(),
+    "h+": date.getHours(),
+    "m+": date.getMinutes(),
+    "s+": date.getSeconds(),
+    "q+": Math.floor((date.getMonth() + 3) / 3),
+    S: date.getMilliseconds(),
   };
 
   if (/(y+)/.test(format)) {
-    format = format.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    format = format.replace(RegExp.$1, (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
   }
 
   for (const key in obj) {
     if (new RegExp(`(${key})`).test(format)) {
-      format = format.replace(RegExp.$1, (RegExp.$1.length == 1) ?
-        (obj[key]) : ((`00${obj[key]}`).substr((obj[key] + '').length)));
+      format = format.replace(RegExp.$1, (RegExp.$1.length === 1)
+        ? (obj[key]) : ((`00${obj[key]}`).substr((`${obj[key]}`).length)));
     }
   }
 
   return format;
 };
-
-let counter = 0;
-exports.getUnique = (prefix) => {
-  return `${prefix || ''}${counter++}`;
-};
-
-
-
-
-
-
-
-
-
-
-
-

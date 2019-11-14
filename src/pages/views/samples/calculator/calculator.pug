@@ -1,0 +1,11 @@
+extends ../../../layouts/index.pug
+
+block body
+  css(src='./calculator.pcss')
+  js(src="jquery" chunk="vendor" cache="true")
+  js(src='./calculator.js')
+
+  div
+    input(id='num0' type='number')
+    input(id='num1' type='number')
+    input(id='sum' type='text')

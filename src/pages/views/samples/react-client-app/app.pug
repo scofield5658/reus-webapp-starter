@@ -1,0 +1,9 @@
+extends ../../../layouts/index.pug
+
+block body
+  css(src="../../../vendors/antd/dist/antd.css" chunk="vendor" cache="true" compile="false")
+  css(src='./app.pcss')
+
+  js(src='./app.jsx')
+
+  #app
