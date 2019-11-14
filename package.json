@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "author": "guozhi <zhi.guo@geekthings.com.cn>",
+  "author": "guozhi <guozhi@gmail.com>",
   "scripts": {
     "start": "cross-env NODE_ENV=dev reus launch . --mode dev",
     "build": "cross-env NODE_ENV=production reus build .",
@@ -19,7 +19,7 @@
     "jquery": "^3.4.1",
     "reus-jagger-plugin": "^0.4.2",
     "reus-swig-plugin": "^0.0.3",
-    "reus.js": "^1.1.1",
+    "reus.js": "^1.1.2",
     "vue": "^2.6.10",
     "vue-navigation": "^1.1.4",
     "vue-router": "^3.0.6",
