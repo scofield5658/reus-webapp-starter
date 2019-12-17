@@ -13,6 +13,7 @@ export const routes = [
     path: tgtRoute("/samples/vue-ssr-app/weather"),
     component: require("../views/weather/weather.vue").default,
   },
+  { path: "/", redirect: tgtRoute("/samples/vue-ssr-app") },
 ];
 
 export const createRouter = () => {

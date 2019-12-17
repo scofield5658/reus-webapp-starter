@@ -20,49 +20,49 @@
   .cities {
     padding: 20px;
 
-    .summary {
+    & .summary {
       color: #00a5e0;
     }
 
-    .recommends {
+    & .recommends {
       margin-top: 10px;
     }
 
-    .city:nth-child(n + 2) {
+    & .city:nth-child(n + 2) {
       margin-left: 10px;
     }
   }
 </style>
 
 <script>
-import {mapState} from 'vuex';
-import {tgtRoute} from '../../../../../../helpers/utils';
+import { mapState } from "vuex";
+import { tgtRoute } from "../../../../../../helpers/utils";
 
 export default {
   data() {
     return {
       cities: [
-        '北京',
-        '上海',
-        '广州',
-        '深圳'
-      ]
+        "北京",
+        "上海",
+        "广州",
+        "深圳",
+      ],
     };
   },
   computed: {
     ...mapState({
       weather(state) {
-        return state.weathers['上海'] || {};
-      }
-    })
+        return state.weathers["上海"] || {};
+      },
+    }),
   },
   methods: {
     goWeather(city) {
       this.$router.push(tgtRoute(`/samples/vue-ssr-app/weather?city=${city}`));
-    }
+    },
   },
-  async asyncData({store}) {
-    await store.dispatch('GET_WEATHER_BY_CODE', {city: '上海'});
-  }
+  async asyncData({ store }) {
+    await store.dispatch("GET_WEATHER_BY_CODE", { city: "上海" });
+  },
 };
 </script>

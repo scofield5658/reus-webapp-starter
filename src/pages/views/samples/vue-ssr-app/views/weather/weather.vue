@@ -19,25 +19,25 @@
 </style>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   data() {
-    const {city} = this.$route.query;
+    const { city } = this.$route.query;
 
     return {
-      city
+      city,
     };
   },
   computed: {
     ...mapState({
       weather(state) {
         return state.weathers[this.city] || {};
-      }
-    })
+      },
+    }),
   },
-  async asyncData({store, route: {query: {city}}}) {
-    await store.dispatch('GET_WEATHER_BY_CODE', {city});
-  }
+  async asyncData({ store, route: { query: { city } } }) {
+    await store.dispatch("GET_WEATHER_BY_CODE", { city });
+  },
 };
 </script>

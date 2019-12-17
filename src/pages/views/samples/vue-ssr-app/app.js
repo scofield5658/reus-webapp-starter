@@ -60,7 +60,7 @@ const createApp = () => {
     });
 
     const beforeResolve = (to, from, next = noop) => {
-      const components = router.getMatchedComponents(to);
+      const components = router.getMatchedComponents(to.path);
       if (!components.length) {
         throw new Error("not found");
       }

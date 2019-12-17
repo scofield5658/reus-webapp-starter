@@ -1,6 +1,7 @@
 const winston = require("winston");
 const WinstonRotateFile = require("winston-daily-rotate-file");
 const path = require("path");
+const moment = require("moment");
 
 const transports = [];
 if (process.env.NODE_ENV !== "production" || !process.env.LOG_PATH) { transports.push(new winston.transports.Console({ colorize: true })); }
@@ -8,7 +9,7 @@ if (process.env.NODE_ENV !== "production" || !process.env.LOG_PATH) { transports
 const appPath = path.join(__dirname, "..");
 const logFilename = process.env.LOG_PATH || path.join(appPath, "..", "logs", "webapp.log");
 
-const { combine, timestamp: timestampFn, printf } = winston.format;
+const { combine, printf } = winston.format;
 
 transports.push(new WinstonRotateFile({
   filename: `${logFilename}.info.%DATE%`,
@@ -22,11 +23,13 @@ transports.push(new WinstonRotateFile({
   level: "error",
 }));
 
-const diyFormatter = printf(({ level, message, timestamp }) => `[${level.toUpperCase()}] ${timestamp}: ${JSON.stringify(message)}`);
+const diyFormatter = printf(({ level, message }) => {
+  const now = moment().format("YYYY-MM-DD HH:mm:ss");
+  return `[${level.toUpperCase()}] ${now}: ${JSON.stringify(message)}`;
+});
 
 const logger = winston.createLogger({
   format: combine(
-    timestampFn(),
     diyFormatter,
   ),
   transports,
