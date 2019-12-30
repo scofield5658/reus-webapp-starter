@@ -36,7 +36,6 @@
 
 <script>
 import { mapState } from "vuex";
-import { tgtRoute } from "../../../../../../helpers/utils";
 
 export default {
   data() {
@@ -58,7 +57,7 @@ export default {
   },
   methods: {
     goWeather(city) {
-      this.$router.push(tgtRoute(`/samples/vue-ssr-app/weather?city=${city}`));
+      this.$router.push({ name: "details", query: { city } });
     },
   },
   async asyncData({ store }) {

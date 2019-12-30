@@ -6,10 +6,12 @@ Vue.use(VueRouter);
 
 export const routes = [
   {
+    name: "cities",
     path: tgtRoute("/samples/vue-ssr-app"),
     component: require("../views/cities/cities.vue").default,
   },
   {
+    name: "details",
     path: tgtRoute("/samples/vue-ssr-app/weather"),
     component: require("../views/weather/weather.vue").default,
   },

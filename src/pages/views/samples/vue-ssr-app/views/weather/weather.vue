@@ -23,10 +23,8 @@ import { mapState } from "vuex";
 
 export default {
   data() {
-    const { city } = this.$route.query;
-
     return {
-      city,
+      city: "",
     };
   },
   computed: {
@@ -35,6 +33,10 @@ export default {
         return state.weathers[this.city] || {};
       },
     }),
+  },
+  created() {
+    const { city } = this.$route.query;
+    this.city = city;
   },
   async asyncData({ store, route: { query: { city } } }) {
     await store.dispatch("GET_WEATHER_BY_CODE", { city });

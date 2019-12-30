@@ -16,7 +16,7 @@ const createApp = () => {
   // must use before inited
   if (isBrowser()) {
     // use navigation
-    Vue.use(require("vue-navigation").default, { router });
+    Vue.use(require("vue-navigation").default, { router, keyName: "vnk" });
     // replace vuex state
     if (window.__STATE__) {
       store.replaceState(window.__STATE__);
@@ -86,7 +86,7 @@ const createApp = () => {
         return router.beforeResolve(beforeResolve);
       });
     } else {
-      beforeResolve(router.currentRoute, null, noop);
+      beforeResolve(router.currentRoute, null, noop); // init with asyncData
       router.beforeResolve(beforeResolve);
     }
   }
