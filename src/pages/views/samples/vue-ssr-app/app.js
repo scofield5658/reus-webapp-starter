@@ -3,7 +3,8 @@ import App from "./app.vue";
 import { createRouter, routes } from "./router";
 import { createStore } from "./store";
 import { isBrowser, queryString, noop } from "../../../../helpers/utils";
-import config from "../../../../../config";
+
+Vue.config.productionTip = false;
 
 // install plugins
 Vue.use(require("./plugins/timeout").default);
@@ -37,7 +38,7 @@ const createApp = () => {
 
     // onload
     const qs = queryString(location.href);
-    if (!(config.env === "production" || qs.__ssr)) {
+    if (!qs.__ssr) {
       inst.showLoading();
     }
 
@@ -80,7 +81,7 @@ const createApp = () => {
       });
     };
 
-    if (config.env === "production" || qs.__ssr) {
+    if (qs.__ssr) {
       router.onReady(() => {
         inst.hideLoading();
         return router.beforeResolve(beforeResolve);

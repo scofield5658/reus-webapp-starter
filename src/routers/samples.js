@@ -13,12 +13,12 @@ module.exports = [
     path: "/samples/vue-ssr-app*",
     title: "vue-ssr-app",
     view: "/pages/views/samples/vue-ssr-app/app.pug",
-    // preload: {
-    //   ssr: {
-    //     type: "vue",
-    //     entry: "/pages/views/samples/vue-ssr-app/app.js",
-    //   },
-    // },
+    preload: {
+      ssr: {
+        type: "vue",
+        entry: "/pages/views/samples/vue-ssr-app/app.js",
+      },
+    },
   },
   {
     path: "/samples/calculator",

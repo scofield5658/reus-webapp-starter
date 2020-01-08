@@ -77,28 +77,28 @@
 </style>
 
 <script>
-import {isBrowser} from '../../../../helpers/utils';
+import { isBrowser } from "../../../../helpers/utils";
 
 export default {
   data() {
     return {
       view: {
-        slide: '',
+        slide: "",
       },
       loading: {
-        slide: '',
+        slide: "",
         visiable: false,
         waiting: false,
-        timeout: null
-      }
+        timeout: null,
+      },
     };
   },
   methods: {
     slideInView() {
-      this.view.slide = '__slide-in';
+      this.view.slide = "__slide-in";
     },
     slideOutView() {
-      this.view.slide = '__slide-out';
+      this.view.slide = "__slide-out";
     },
     slideInLoading() {
       if (!isBrowser()) {
@@ -106,14 +106,13 @@ export default {
       }
 
       const $ = window.Zepto;
-      const $loading = $('#app > .__loading');
+      const $loading = $("#app > .__loading");
 
-      $loading.removeClass('enter').addClass('animate leave').show();
+      $loading.removeClass("enter").addClass("animate leave").show();
 
       this.timeoutid = this.$setTimeout(() => {
-        $loading.removeClass('leave').addClass('enter');
+        $loading.removeClass("leave").addClass("enter");
       }, 1000 / 60);
-
     },
     slideOutLoading() {
       if (!isBrowser()) {
@@ -121,12 +120,11 @@ export default {
       }
 
       const $ = window.Zepto;
-      const $loading = $('#app > .__loading');
+      const $loading = $("#app > .__loading");
 
       this.timeoutid = this.$setTimeout(() => {
-        $loading.removeClass('enter').addClass('leave');
+        $loading.removeClass("enter").addClass("leave");
       }, 1000 / 60);
-
     },
     showLoading() {
       if (!isBrowser()) {
@@ -134,10 +132,9 @@ export default {
       }
 
       const $ = window.Zepto;
-      const $loading = $('#app > .__loading');
+      const $loading = $("#app > .__loading");
 
-      $loading.removeClass('enter animate').addClass('leave').show();
-
+      $loading.removeClass("enter animate").addClass("leave").show();
     },
     hideLoading() {
       if (!isBrowser()) {
@@ -145,11 +142,10 @@ export default {
       }
 
       const $ = window.Zepto;
-      const $loading = $('#app > .__loading');
+      const $loading = $("#app > .__loading");
 
-      $loading.removeClass('animate enter leave').hide();
-
-    }
-  }
+      $loading.removeClass("animate enter leave").hide();
+    },
+  },
 };
 </script>
