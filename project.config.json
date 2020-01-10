@@ -8,7 +8,7 @@
     "reloadDelay": 300,
     "notify": false,
     "domain": "",
-    "files": ["./src/pages"]
+    "files": ["./src/pages/**/*"]
   },
   "plugins": [
     {

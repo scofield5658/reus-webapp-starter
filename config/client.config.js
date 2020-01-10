@@ -1,16 +1,12 @@
 const env = process.env.NODE_ENV || "production";
 
-module.exports = {
+const config = {
+  dev: {
 
-  ...{
-    // dev
-    dev: {
+  },
+  production: {
 
-    },
-
-    // production
-    production: {
-
-    },
-  }[env],
+  },
 };
+
+module.exports = config[env];

@@ -6,17 +6,19 @@ const env = process.env.NODE_ENV || "production";
 const targetConfig = process.env.TARGET === "client"
   ? require("./client.config.js") : require("./server.config.js");
 
-module.exports = {
+const config = {
+  dev: {
+
+  },
+  production: {
+
+  },
+};
+
+module.exports = Object.assign({ /* eslint-disable-line */
   timestamp: +new Date(),
   env,
   baseUrl: process.env.BASE_URL || "/jagger",
   cdnUrl: process.env.CDN_URL || "/jagger",
   assets: /\.(png|jpe?g|gif|svg|pdf|ico)(\?.*)?$/i,
-  ...{
-    // dev
-    dev: {},
-    // production
-    production: {},
-  }[env],
-  ...targetConfig,
-};
+}, config[env], targetConfig);

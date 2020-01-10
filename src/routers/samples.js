@@ -1,5 +1,10 @@
 module.exports = [
   {
+    path: "/samples/calculator",
+    title: "calculator",
+    view: "/pages/views/samples/calculator/calculator.pug",
+  },
+  {
     path: "/samples/reference",
     title: "reference",
     view: "/pages/views/samples/reference/reference.pug",
@@ -21,8 +26,8 @@ module.exports = [
     },
   },
   {
-    path: "/samples/calculator",
-    title: "calculator",
-    view: "/pages/views/samples/calculator/calculator.pug",
+    path: "/samples/vue-hot-update*",
+    title: "vue-hot-update",
+    view: "/pages/views/samples/vue-hot-update/dist/index.html",
   },
 ];
