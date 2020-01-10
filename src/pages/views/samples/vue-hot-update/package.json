@@ -10,7 +10,7 @@
     "build": "cross-env TARGET=client node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.19.1",
     "mint-ui": "^2.2.13",
     "moment": "^2.20.1",
     "vue": "^2.6.11",
