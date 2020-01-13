@@ -26,9 +26,9 @@ module.exports = {
   build: {
     index: path.resolve(__dirname, "../dist/index.html"),
 
-    assetsRoot: path.resolve(__dirname, "../dist"),
+    assetsRoot: path.resolve(__dirname, "../dist/"),
     assetsSubDirectory: "static",
-    assetsPublicPath: `${reusConfig.baseUrl}/views/samples/vue-hot-update/dist`,
+    assetsPublicPath: `${reusConfig.baseUrl}/views/samples/vue-hot-update/dist/`,
 
     productionSourceMap: true,
     devtool: "#source-map",

@@ -27,7 +27,6 @@ module.exports = [
   },
   {
     path: "/samples/vue-hot-update*",
-    title: "vue-hot-update",
     view: "/pages/views/samples/vue-hot-update/dist/index.html",
   },
 ];
