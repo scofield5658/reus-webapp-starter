@@ -22,3 +22,21 @@ export const qs = {
     return obj;
   },
 };
+
+export const downloadFile = (blob, options) => {
+  if (!document || !window || !window.Blob) {
+    throw new Error("当前浏览器不支持下载该文件");
+  }
+  const { filename, type } = options;
+  if (navigator.msSaveBlob) {
+    navigator.msSaveBlob(blob, `${filename}.${type}`);
+  } else {
+    const linkElem = document.createElement("a");
+    linkElem.target = "_blank";
+    linkElem.download = `${filename}.${type}`;
+    linkElem.href = URL.createObjectURL(blob);
+    document.body.appendChild(linkElem);
+    linkElem.click();
+    document.body.removeChild(linkElem);
+  }
+};
