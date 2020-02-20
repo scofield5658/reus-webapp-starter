@@ -2,7 +2,7 @@
   "name": "vue-mobileapp-boilerplate",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "guozhi <guozhi@finogeeks.com>",
+  "author": "guozhi <guozhi5658@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -10,7 +10,7 @@
     "build": "cross-env TARGET=client node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.19.2",
     "mint-ui": "^2.2.13",
     "moment": "^2.20.1",
     "vue": "^2.6.11",
@@ -43,9 +43,15 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
+    "pug": "^2.0.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "pug-filters": "^3.1.1",
+    "pug-loader": "^2.4.0",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.6.1",
