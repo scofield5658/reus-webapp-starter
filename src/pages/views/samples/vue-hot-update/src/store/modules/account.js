@@ -1,29 +1,19 @@
-import * as types from "../mutation-types";
+import * as types from "../mutationTypes";
 
 const defaultState = {
   isLogin: false,
   userInfo: {},
 };
 
-// 异步操作放置在action中
 const actions = {
-  login({ commit }, loginInfo) {
-    const uname = loginInfo.username;
-    window.setTimeout(() => {
-      const userInfo = {
-        username: uname,
-      };
-      commit(types.LOGIN_SUCCESS, userInfo);
-    }, 3000);
+  login({ commit }, userInfo) {
+    commit(types.LOGIN_SUCCESS, userInfo);
   },
   logout({ commit }) {
-    window.setTimeout(() => {
-      commit(types.LOGOUT_SUCCESS);
-    }, 3000);
+    commit(types.LOGOUT_SUCCESS);
   },
 };
 
-// 此处只进行同步操作
 const mutations = {
   [types.LOGIN_SUCCESS](state, userInfo) {
     state.userInfo = userInfo;

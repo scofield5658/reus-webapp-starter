@@ -10,6 +10,9 @@ const config = {
   dev: {
 
   },
+  uat: {
+
+  },
   production: {
 
   },
